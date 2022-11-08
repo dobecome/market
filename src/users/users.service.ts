@@ -1,26 +1,36 @@
-import { Injectable } from '@nestjs/common';
-import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
+import { Injectable } from "@nestjs/common";
+import { CreateUserDto } from "./dto/create-user.dto";
+import { UpdateUserDto } from "./dto/update-user.dto";
+import { User } from "./schemas/user.schema";
+import { UsersRepository } from "./users.repository";
+import { v4 as uuidv4 } from "uuid";
+import * as argon from "argon2";
 
 @Injectable()
 export class UsersService {
-  create(createUserDto: CreateUserDto) {
-    return 'This action adds a new user';
+  constructor(private readonly usersRepository: UsersRepository) {}
+
+  async getUserById(userId: string): Promise<User> {
+    return this.usersRepository.findOne({ userId });
   }
 
-  findAll() {
-    return `This action returns all users`;
+  async getUsers(): Promise<User[]> {
+    return this.usersRepository.find({});
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} user`;
+  async createUser(dto: CreateUserDto): Promise<User> {
+    const newHash = await argon.hash(dto.hash);
+
+    return this.usersRepository.create({
+      userId: uuidv4(),
+      email: dto.email,
+      hash: newHash,
+      marketId: [],
+    });
   }
 
-  update(id: number, updateUserDto: UpdateUserDto) {
-    return `This action updates a #${id} user`;
+  async updateUser(userId: string, userUpdates: UpdateUserDto): Promise<User> {
+    return this.usersRepository.findOneAndUpdate({ userId }, userUpdates);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} user`;
-  }
 }

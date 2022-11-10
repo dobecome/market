@@ -12,6 +12,8 @@ https://mellow-deer-e21.notion.site/4-e8e221543d50424b8994a4a3991e5eb1
 2) DB : MongoDB (Docker)
 
 ## 3. API 명세
+| API 명세 |  |  |  |  |
+| --- | --- | --- | --- | --- |
 | INDEX | METHOD | URI | DESCRIPTION | REMARK |
 | 1 | POST | /api/users/signup | 회원가입 | O |
 | 2 | POST | /api/users/signin?email=&pw= | 로그인 | O |

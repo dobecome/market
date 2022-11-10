@@ -57,4 +57,12 @@ https://mellow-deer-e21.notion.site/4-e8e221543d50424b8994a4a3991e5eb1
 | marketId | array |  |
 
 ## 미비 사항 및 추후 적용 예정 사항
+1. 마켓 등록 및 상품 등록 시 각 테이블의 외래키 역할을 하는 userId, productId에 각 id를 $push 해줘서 array 타입 데이터 쌓기
+2. Unit Test (Jest), Validation, Logging(Winston) 적용 하기
+3. 
+
+
+
+
+
 

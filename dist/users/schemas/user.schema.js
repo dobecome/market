@@ -5,6 +5,6 @@ const mongoose = require("mongoose");
 exports.UserSchema = new mongoose.Schema({
     email: String,
     hash: String,
-    marketId: String,
+    marketId: [],
 });
 //# sourceMappingURL=user.schema.js.map

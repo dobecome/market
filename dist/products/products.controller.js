@@ -24,17 +24,26 @@ let ProductsController = class ProductsController {
     create(dto) {
         return this.productsService.create(dto);
     }
-    findAll() {
-        return this.productsService.findAll();
+    getProductsByName(name) {
+        return this.productsService.getProductsByName(name);
     }
-    findOne(id) {
-        return this.productsService.findOne(+id);
+    getProductsByCategory(name) {
+        return this.productsService.getProductsByCategory(name);
     }
-    update(id, updateProductDto) {
-        return this.productsService.update(+id, updateProductDto);
+    getProductsByCountry(name) {
+        return this.productsService.getProductsByCountry(name);
+    }
+    update(id, dto) {
+        return this.productsService.update(id, dto);
     }
     remove(id) {
-        return this.productsService.remove(+id);
+        return this.productsService.remove(id);
+    }
+    getProductById(id) {
+        return this.productsService.getProductById(id);
+    }
+    getProductsOrderByCreatedAt(orderBy, order) {
+        return this.productsService.getProductsOrderByCreatedAt(orderBy, order);
     }
 };
 __decorate([
@@ -45,18 +54,26 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], ProductsController.prototype, "create", null);
 __decorate([
-    (0, common_1.Get)(),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
-    __metadata("design:returntype", void 0)
-], ProductsController.prototype, "findAll", null);
-__decorate([
-    (0, common_1.Get)(':id'),
-    __param(0, (0, common_1.Param)('id')),
+    (0, common_1.Get)('name'),
+    __param(0, (0, common_1.Query)('name')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", void 0)
-], ProductsController.prototype, "findOne", null);
+], ProductsController.prototype, "getProductsByName", null);
+__decorate([
+    (0, common_1.Get)('category'),
+    __param(0, (0, common_1.Query)('name')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", void 0)
+], ProductsController.prototype, "getProductsByCategory", null);
+__decorate([
+    (0, common_1.Get)('country'),
+    __param(0, (0, common_1.Query)('name')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", void 0)
+], ProductsController.prototype, "getProductsByCountry", null);
 __decorate([
     (0, common_1.Patch)(':id'),
     __param(0, (0, common_1.Param)('id')),
@@ -72,6 +89,21 @@ __decorate([
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", void 0)
 ], ProductsController.prototype, "remove", null);
+__decorate([
+    (0, common_1.Get)(':id'),
+    __param(0, (0, common_1.Param)('id')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", void 0)
+], ProductsController.prototype, "getProductById", null);
+__decorate([
+    (0, common_1.Get)(),
+    __param(0, (0, common_1.Query)('order_by')),
+    __param(1, (0, common_1.Query)('order')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, String]),
+    __metadata("design:returntype", void 0)
+], ProductsController.prototype, "getProductsOrderByCreatedAt", null);
 ProductsController = __decorate([
     (0, common_1.Controller)('api/products'),
     __metadata("design:paramtypes", [products_service_1.ProductsService])

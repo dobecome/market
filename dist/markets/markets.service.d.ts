@@ -1,9 +1,10 @@
+import { Model } from 'mongoose';
+import { User } from 'src/users/interfaces/user.interface';
 import { CreateMarketDto } from './dto/create-market.dto';
-import { UpdateMarketDto } from './dto/update-market.dto';
+import { Market } from './interfaces/market.interface';
 export declare class MarketsService {
-    create(createMarketDto: CreateMarketDto): string;
-    findAll(): string;
-    findOne(id: number): string;
-    update(id: number, updateMarketDto: UpdateMarketDto): string;
-    remove(id: number): string;
+    private marketModel;
+    private userModel;
+    constructor(marketModel: Model<Market>, userModel: Model<User>);
+    create(userId: string, dto: CreateMarketDto): Promise<Market>;
 }

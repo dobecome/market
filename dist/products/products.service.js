@@ -27,19 +27,45 @@ let ProductsService = class ProductsService {
         const products = this.productModel.find();
         return products.exec();
     }
-    findOne(id) {
-        return `This action returns a #${id} product`;
+    async update(id, dto) {
+        const product = this.productModel.updateOne({ _id: id }, { $set: Object.assign({}, dto) });
+        return product.update();
     }
-    update(id, updateProductDto) {
-        return `This action updates a #${id} product`;
+    async remove(id) {
+        return await this.productModel.deleteOne({ _id: id });
     }
-    remove(id) {
-        return `This action removes a #${id} product`;
+    async getProductsByName(name) {
+        const product = this.productModel.find({
+            name: { $regex: ".*" + name + ".*" },
+        });
+        return product;
+    }
+    async getProductsByCategory(name) {
+        const product = this.productModel.find({
+            category: { $regex: ".*" + name + ".*" },
+        });
+        return product;
+    }
+    async getProductsByCountry(name) {
+        const product = this.productModel.find({
+            country: { $regex: ".*" + name + ".*" },
+        });
+        return product;
+    }
+    async getProductById(id) {
+        const products = this.productModel.findOne({ _id: id });
+        return products.exec();
+    }
+    async getProductsOrderByCreatedAt(orderBy, order) {
+        const products = this.productModel
+            .find({})
+            .sort({ [orderBy]: order === "desc" ? -1 : 1 });
+        return products.exec();
     }
 };
 ProductsService = __decorate([
     (0, common_1.Injectable)(),
-    __param(0, (0, common_1.Inject)('PRODUCT_MODEL')),
+    __param(0, (0, common_1.Inject)("PRODUCT_MODEL")),
     __metadata("design:paramtypes", [mongoose_1.Model])
 ], ProductsService);
 exports.ProductsService = ProductsService;

@@ -16,64 +16,24 @@ exports.MarketsController = void 0;
 const common_1 = require("@nestjs/common");
 const markets_service_1 = require("./markets.service");
 const create_market_dto_1 = require("./dto/create-market.dto");
-const update_market_dto_1 = require("./dto/update-market.dto");
 let MarketsController = class MarketsController {
     constructor(marketsService) {
         this.marketsService = marketsService;
     }
-    create(createMarketDto) {
-        return this.marketsService.create(createMarketDto);
-    }
-    findAll() {
-        return this.marketsService.findAll();
-    }
-    findOne(id) {
-        return this.marketsService.findOne(+id);
-    }
-    update(id, updateMarketDto) {
-        return this.marketsService.update(+id, updateMarketDto);
-    }
-    remove(id) {
-        return this.marketsService.remove(+id);
+    create(userId, dto) {
+        return this.marketsService.create(userId, dto);
     }
 };
 __decorate([
-    (0, common_1.Post)(),
-    __param(0, (0, common_1.Body)()),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [create_market_dto_1.CreateMarketDto]),
-    __metadata("design:returntype", void 0)
-], MarketsController.prototype, "create", null);
-__decorate([
-    (0, common_1.Get)(),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
-    __metadata("design:returntype", void 0)
-], MarketsController.prototype, "findAll", null);
-__decorate([
-    (0, common_1.Get)(':id'),
-    __param(0, (0, common_1.Param)('id')),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String]),
-    __metadata("design:returntype", void 0)
-], MarketsController.prototype, "findOne", null);
-__decorate([
-    (0, common_1.Patch)(':id'),
-    __param(0, (0, common_1.Param)('id')),
+    (0, common_1.Post)(':userId'),
+    __param(0, (0, common_1.Param)('userId')),
     __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, update_market_dto_1.UpdateMarketDto]),
+    __metadata("design:paramtypes", [String, create_market_dto_1.CreateMarketDto]),
     __metadata("design:returntype", void 0)
-], MarketsController.prototype, "update", null);
-__decorate([
-    (0, common_1.Delete)(':id'),
-    __param(0, (0, common_1.Param)('id')),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String]),
-    __metadata("design:returntype", void 0)
-], MarketsController.prototype, "remove", null);
+], MarketsController.prototype, "create", null);
 MarketsController = __decorate([
-    (0, common_1.Controller)('markets'),
+    (0, common_1.Controller)('api/markets'),
     __metadata("design:paramtypes", [markets_service_1.MarketsService])
 ], MarketsController);
 exports.MarketsController = MarketsController;

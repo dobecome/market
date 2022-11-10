@@ -40,15 +40,9 @@ let UsersService = class UsersService {
         });
         return user.exec();
     }
-    async getUserById(userId) {
-        return this.userModel.findOne({ userId });
-    }
     async findAll() {
         const users = this.userModel.find();
         return users.exec();
-    }
-    async updateUser(userId, userUpdates) {
-        return this.userModel.findOneAndUpdate({ userId }, userUpdates);
     }
 };
 UsersService = __decorate([

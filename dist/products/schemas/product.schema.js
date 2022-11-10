@@ -5,6 +5,8 @@ const mongoose = require("mongoose");
 exports.ProductSchema = new mongoose.Schema({
     name: String,
     cost: Number,
+    category: String,
+    country: String,
     expiredAt: Date,
     marketId: String,
 });

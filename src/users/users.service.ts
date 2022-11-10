@@ -34,16 +34,16 @@ export class UsersService {
     return user.exec();
   }
 
-  async getUserById(userId: string) {
-    return this.userModel.findOne({ userId });
-  }
-
   async findAll(): Promise<User[]> {
     const users = this.userModel.find();
     return users.exec();
   }
 
-  async updateUser(userId: string, userUpdates: UpdateUserDto): Promise<User> {
-    return this.userModel.findOneAndUpdate({ userId }, userUpdates);
-  }
+  // async getUserById(userId: string) {
+  //   return this.userModel.findOne({ userId });
+  // }
+
+  // async updateUser(userId: string, userUpdates: UpdateUserDto): Promise<User> {
+  //   return this.userModel.findOneAndUpdate({ userId }, userUpdates);
+  // }
 }

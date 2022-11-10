@@ -5,28 +5,38 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.MarketsService = void 0;
 const common_1 = require("@nestjs/common");
+const mongoose_1 = require("mongoose");
+const uuid_1 = require("uuid");
 let MarketsService = class MarketsService {
-    create(createMarketDto) {
-        return 'This action adds a new market';
+    constructor(marketModel, userModel) {
+        this.marketModel = marketModel;
+        this.userModel = userModel;
     }
-    findAll() {
-        return `This action returns all markets`;
-    }
-    findOne(id) {
-        return `This action returns a #${id} market`;
-    }
-    update(id, updateMarketDto) {
-        return `This action updates a #${id} market`;
-    }
-    remove(id) {
-        return `This action removes a #${id} market`;
+    async create(userId, dto) {
+        const marketId = await (0, uuid_1.v4)();
+        const market = await this.marketModel.create({
+            id: marketId,
+            userId,
+            name: dto.name,
+        });
+        return market.save();
     }
 };
 MarketsService = __decorate([
-    (0, common_1.Injectable)()
+    (0, common_1.Injectable)(),
+    __param(0, (0, common_1.Inject)('MARKET_MODEL')),
+    __param(1, (0, common_1.Inject)('USER_MODEL')),
+    __metadata("design:paramtypes", [mongoose_1.Model,
+        mongoose_1.Model])
 ], MarketsService);
 exports.MarketsService = MarketsService;
 //# sourceMappingURL=markets.service.js.map

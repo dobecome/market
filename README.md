@@ -59,7 +59,8 @@ https://mellow-deer-e21.notion.site/4-e8e221543d50424b8994a4a3991e5eb1
 ## 미비 사항 및 추후 적용 예정 사항
 1. 마켓 등록 및 상품 등록 시 각 테이블의 외래키 역할을 하는 userId, productId에 각 id를 $push 해줘서 array 타입 데이터 쌓기
 2. Unit Test (Jest), Validation, Logging(Winston) 적용 하기
-3. 
+3. 각 API 서비스들의 예외처리, status code 처리 등...
+4. JWT 적용하여 서비스마다 토큰 인증 필요
 
 
 

@@ -1,5 +1,6 @@
 import { Inject, Injectable } from "@nestjs/common";
 import { Model } from "mongoose";
+import { Market } from "src/markets/interfaces/market.interface";
 import { CreateProductDto } from "./dto/create-product.dto";
 import { UpdateProductDto } from "./dto/update-product.dto";
 import { Product } from "./interfaces/product.interface";
@@ -8,11 +9,16 @@ import { Product } from "./interfaces/product.interface";
 export class ProductsService {
   constructor(
     @Inject("PRODUCT_MODEL")
-    private productModel: Model<Product>
+    private productModel: Model<Product>,
+    @Inject("MARKET_MODEL")
+    private marketModel: Model<Market>
   ) {}
 
   async create(dto: CreateProductDto): Promise<Product> {
     const product = new this.productModel(dto);
+    // 상품 등록 시, market 테이블의 productId 컬럼에 productId 추가
+    // 에러 트러블슈팅 필요
+    // const user = await this.marketModel.updateOne({_id:marketId}, { $push: { productId:productId } });
     return product.save();
   }
 

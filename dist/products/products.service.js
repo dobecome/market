@@ -19,12 +19,13 @@ let ProductsService = class ProductsService {
     constructor(productModel) {
         this.productModel = productModel;
     }
-    create(createProductDto) {
-        return 'This action adds a new product';
+    async create(dto) {
+        const product = new this.productModel(dto);
+        return product.save();
     }
-    findAll() {
-        const products = this.productModel.find({});
-        return products;
+    async findAll() {
+        const products = this.productModel.find();
+        return products.exec();
     }
     findOne(id) {
         return `This action returns a #${id} product`;

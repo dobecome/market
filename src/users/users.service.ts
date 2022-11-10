@@ -1,36 +1,49 @@
-import { Injectable } from "@nestjs/common";
+import { Inject, Injectable } from "@nestjs/common";
 import { CreateUserDto } from "./dto/create-user.dto";
 import { UpdateUserDto } from "./dto/update-user.dto";
-import { User } from "./schemas/user.schema";
-import { UsersRepository } from "./users.repository";
 import { v4 as uuidv4 } from "uuid";
 import * as argon from "argon2";
+import { Model } from "mongoose";
+import { User } from "./interfaces/user.interface";
 
 @Injectable()
 export class UsersService {
-  constructor(private readonly usersRepository: UsersRepository) {}
-
-  async getUserById(userId: string): Promise<User> {
-    return this.usersRepository.findOne({ userId });
-  }
-
-  async getUsers(): Promise<User[]> {
-    return this.usersRepository.find({});
-  }
+  constructor(
+    @Inject("USER_MODEL")
+    private userModel: Model<User>
+  ) {}
 
   async createUser(dto: CreateUserDto): Promise<User> {
     const newHash = await argon.hash(dto.hash);
-
-    return this.usersRepository.create({
+    return this.userModel.create({
       userId: uuidv4(),
       email: dto.email,
       hash: newHash,
-      marketId: [],
+      marketId: dto.marketId,
     });
   }
 
-  async updateUser(userId: string, userUpdates: UpdateUserDto): Promise<User> {
-    return this.usersRepository.findOneAndUpdate({ userId }, userUpdates);
+  async signin(email: string, pw: string): Promise<User> {
+    const hash = await argon.hash(pw);
+    const user = this.userModel.findOne({
+      where: {
+        email,
+        hash,
+      },
+    });
+    return user.exec();
   }
 
+  async getUserById(userId: string) {
+    return this.userModel.findOne({ userId });
+  }
+
+  async findAll(): Promise<User[]> {
+    const users = this.userModel.find();
+    return users.exec();
+  }
+
+  async updateUser(userId: string, userUpdates: UpdateUserDto): Promise<User> {
+    return this.userModel.findOneAndUpdate({ userId }, userUpdates);
+  }
 }

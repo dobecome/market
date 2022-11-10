@@ -11,13 +11,14 @@ export class ProductsService {
     private productModel: Model<Product>,
     ){}
 
-  create(createProductDto: CreateProductDto) {
-    return 'This action adds a new product';
+  async create(dto: CreateProductDto) : Promise<Product> {
+    const product = new this.productModel(dto);
+    return product.save();
   }
 
-  findAll() {
-    const products = this.productModel.find({});
-    return products;
+  async findAll(): Promise<Product[]>{
+    const products = this.productModel.find();
+    return products.exec();
   }
 
   findOne(id: number) {

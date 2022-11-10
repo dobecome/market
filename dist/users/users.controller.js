@@ -21,11 +21,15 @@ let UsersController = class UsersController {
     constructor(usersService) {
         this.usersService = usersService;
     }
-    async create(dto) {
+    create(dto) {
         return this.usersService.createUser(dto);
     }
-    async findAll() {
-        return this.usersService.getUsers();
+    signin(email, pw) {
+        console.log('here?');
+        return this.usersService.signin(email, pw);
+    }
+    findAll() {
+        return this.usersService.findAll();
     }
     async findOne(id) {
         return this.usersService.getUserById(id);
@@ -35,17 +39,25 @@ let UsersController = class UsersController {
     }
 };
 __decorate([
-    (0, common_1.Post)(),
+    (0, common_1.Post)('signup'),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [create_user_dto_1.CreateUserDto]),
-    __metadata("design:returntype", Promise)
+    __metadata("design:returntype", void 0)
 ], UsersController.prototype, "create", null);
+__decorate([
+    (0, common_1.Get)(),
+    __param(0, (0, common_1.Query)('email')),
+    __param(1, (0, common_1.Query)('pw')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, String]),
+    __metadata("design:returntype", void 0)
+], UsersController.prototype, "signin", null);
 __decorate([
     (0, common_1.Get)(),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
-    __metadata("design:returntype", Promise)
+    __metadata("design:returntype", void 0)
 ], UsersController.prototype, "findAll", null);
 __decorate([
     (0, common_1.Get)(':id'),

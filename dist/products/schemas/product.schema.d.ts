@@ -3,4 +3,5 @@ export declare const ProductSchema: mongoose.Schema<any, mongoose.Model<any, any
     name?: string;
     cost?: number;
     expiredAt?: Date;
+    marketId?: string;
 }>;

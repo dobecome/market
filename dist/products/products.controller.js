@@ -21,8 +21,8 @@ let ProductsController = class ProductsController {
     constructor(productsService) {
         this.productsService = productsService;
     }
-    create(createProductDto) {
-        return this.productsService.create(createProductDto);
+    create(dto) {
+        return this.productsService.create(dto);
     }
     findAll() {
         return this.productsService.findAll();
@@ -73,7 +73,7 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], ProductsController.prototype, "remove", null);
 ProductsController = __decorate([
-    (0, common_1.Controller)('products'),
+    (0, common_1.Controller)('api/products'),
     __metadata("design:paramtypes", [products_service_1.ProductsService])
 ], ProductsController);
 exports.ProductsController = ProductsController;

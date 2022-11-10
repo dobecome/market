@@ -10,12 +10,15 @@ exports.AppModule = void 0;
 const common_1 = require("@nestjs/common");
 const markets_module_1 = require("./markets/markets.module");
 const products_module_1 = require("./products/products.module");
+const users_module_1 = require("./users/users.module");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
     (0, common_1.Module)({
         imports: [
-            products_module_1.ProductsModule, markets_module_1.MarketsModule
+            users_module_1.UsersModule,
+            products_module_1.ProductsModule,
+            markets_module_1.MarketsModule,
         ],
     })
 ], AppModule);

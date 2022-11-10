@@ -17,8 +17,8 @@ https://mellow-deer-e21.notion.site/4-e8e221543d50424b8994a4a3991e5eb1
 | INDEX | METHOD | URI | DESCRIPTION | REMARK |
 | 1 | POST | /api/users/signup | 회원가입 | O |
 | 2 | POST | /api/users/signin?email=&pw= | 로그인 | O |
-| 3 | POST | /api/markets/:userId | 판매자 등록 | O |
-| 4 | POST | /api/products | 상품 등록 | O |
+| 3 | POST | /api/markets/:userId | 판매자 등록 | △ |
+| 4 | POST | /api/products | 상품 등록 | △ |
 | 5 | PATCH | /api/products | 상품 수정 | O |
 | 6 | DELETE | /api/products/:productId | 상품 삭제 | O |
 | 7 | GET | /api/products | 마켓 상품 전체 조회 | O |

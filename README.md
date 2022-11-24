@@ -1,7 +1,7 @@
 # market
 
 ## 개발 Notion Link
-https://mellow-deer-e21.notion.site/4-e8e221543d50424b8994a4a3991e5eb1
+https://voracious-puffin-506.notion.site/4-7205c886455a469e9e884d03be05348b
 
 ## 1. 프로젝트 목적
 - 마켓 상품 관리
